@@ -1,0 +1,64 @@
+name: Deploy to GitHub Pages
+
+# The NRO is not in this repository: it is an asset (mgr.nro) of a release of the mgr-nx-deko repository of the same
+# owner. Each deployment downloads it into release/, checks it against release/manifest.json and publishes the page
+# with it. Run it by hand (Actions > Deploy to GitHub Pages > Run workflow) after publishing a new release there.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release of mgr-nx-deko to take the NRO from (empty for the latest)
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Download the NRO of the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+          REPO: ${{ github.repository_owner }}/mgr-nx-deko
+        run: gh release download $TAG --repo "$REPO" --pattern 'mgr.nro' --dir release --clobber
+
+      - name: Check it against the list of builds
+        run: node .github/verify_release.mjs
+
+      - name: Check the page's own code
+        run: node test/texts_node.mjs
+
+      - name: Assemble the site
+        run: |
+          mkdir _site
+          cp -r index.html app.js worker.js sw.js icons renut_shader_common.h lib wasm release _site/
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

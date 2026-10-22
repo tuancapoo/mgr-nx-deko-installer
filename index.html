@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mgr-nx-deko installer</title>
+  <meta name="description" content="Builds the Nintendo Switch package of Metal Gear Rising: Revengeance from your own Xbox 360 copy, in your browser.">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <style>
+    :root { color-scheme: dark; --bg: #070b1c; --panel: rgba(12, 18, 44, .82); --inset: rgba(4, 7, 20, .78); --text: #eef2fb;
+      --muted: #aab4cf; --accent: #f5c518; --blue: #2f6cf0; --good: #4fd17f; --bad: #ff6b6b; --link: #63a4ff;
+      --link-hover: #9cc4ff; --line: rgba(255, 255, 255, .10);
+      --gap: clamp(8px, 1.1vh, 14px); --pad: clamp(10px, 1.5vh, 18px); --edge: clamp(10px, 2vh, 28px); }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { background: var(--bg); }
+    body { margin: 0; min-height: 100vh; color: var(--text); background: var(--bg);
+      font: clamp(15px, 1.7vh, 16px)/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    /* a night sky in the colours of the game's key art: blue, violet and a rose glow, with a fast streak */
+    body::before { content: ""; position: fixed; inset: 0; z-index: -1;
+      background:
+        linear-gradient(115deg, transparent 46%, rgba(245, 197, 24, .08) 48%, transparent 50%),
+        linear-gradient(115deg, transparent 54%, rgba(99, 164, 255, .07) 55.5%, transparent 57%),
+        radial-gradient(60% 45% at 85% 12%, rgba(232, 92, 160, .30), transparent 70%),
+        radial-gradient(70% 55% at 10% 20%, rgba(47, 108, 240, .38), transparent 70%),
+        radial-gradient(80% 60% at 50% 110%, rgba(120, 70, 220, .35), transparent 70%),
+        var(--bg); }
+    main { width: 100%; max-width: 960px; margin: 0 auto; padding: var(--edge) 16px;
+      display: flex; flex-direction: column; gap: var(--gap); }
+    header { text-align: center; }
+    .logo { display: block; width: clamp(84px, 13vh, 132px); height: auto; margin: 0 auto calc(var(--gap) * .8);
+      border-radius: 22%; box-shadow: 0 10px 34px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .12); }
+    h1 { font-size: clamp(1.7rem, 4.6vh, 2.6rem); font-weight: 900; font-style: italic; letter-spacing: .01em;
+      line-height: 1.1; margin: 0 0 var(--gap); text-shadow: 0 2px 14px rgba(0, 0, 0, .8); }
+    h1 .accent { color: var(--accent); }
+    p.lead { color: #d9e0f2; font-size: clamp(15px, 1.8vh, 17px); margin: 0 auto; max-width: 760px; text-wrap: balance;
+      text-shadow: 0 1px 10px rgba(0, 0, 0, .9); }
+    p.lead strong { white-space: nowrap; }
+    section { background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+      padding: var(--pad) calc(var(--pad) + 4px); box-shadow: 0 12px 32px rgba(0, 0, 0, .35);
+      -webkit-backdrop-filter: blur(10px) saturate(1.15); backdrop-filter: blur(10px) saturate(1.15); }
+    h2 { font-size: 1.1em; font-weight: 800; margin: 0 0 calc(var(--pad) * .6); }
+    button, label.button { display: inline-block; background: #283463; color: #fff; border: 1px solid #344281;
+      border-radius: 10px; padding: .5em 1.05em; font-family: inherit; font-size: 1em; font-weight: 700; line-height: 1.3;
+      cursor: pointer; margin: 4px 8px 4px 0; transition: background .12s, border-color .12s; }
+    button:not(:disabled):hover, label.button:hover { background: #31407a; border-color: #5a6db8; }
+    button:focus-visible, label.button:focus-within { outline: 2px solid var(--link); outline-offset: 2px; }
+    button.primary:not(:disabled) { background: var(--blue); border-color: #5b8cff; }
+    button.primary:not(:disabled):hover { background: #3f7bff; }
+    button:disabled { background: #1c2340; border-color: #1c2340; color: #6f7894; cursor: default; }
+    input[type=file] { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .hint { margin: calc(var(--pad) * .5) 0 0; }
+    .note { margin: calc(var(--pad) * .6) 0 0; padding: calc(var(--pad) * .45) calc(var(--pad) * .6);
+      background: var(--inset); border: 1px solid var(--line); border-radius: 10px; }
+    .chosen { color: var(--muted); margin-top: calc(var(--pad) * .35); word-break: break-all; }
+    .choices { display: grid; justify-items: start; row-gap: calc(var(--pad) * .4); }
+    .choices button { margin: 0; }
+    .choices button + .flow { margin-top: calc(var(--pad) * .7); }
+    .detected { display: flex; align-items: center; gap: 14px; margin-top: calc(var(--pad) * .7); background: var(--inset);
+      border: 1px solid var(--line); border-radius: 10px; padding: 10px 16px; min-height: 64px; }
+    .detected.good { border-color: var(--good); }
+    .detected.bad { border-color: var(--bad); }
+    .detected img { width: 44px; height: 44px; border-radius: 10px; flex: none; }
+    .detected .status { font-size: 1.2rem; font-weight: 800; }
+    .detected .detail { color: var(--muted); font-size: .92rem; }
+    .detected.good .detail { color: var(--good); }
+    .detected.bad .detail { color: var(--bad); }
+    .fingerprint { font: 12px ui-monospace, monospace; word-break: break-all; user-select: all; }
+    progress { width: 100%; height: 12px; margin-top: calc(var(--pad) * .7); accent-color: var(--accent); }
+    #log { font: 13px/1.45 ui-monospace, monospace; color: var(--muted); white-space: pre-wrap; max-height: 9.5em;
+      overflow: auto; margin: 8px 0 0; }
+    .error { color: var(--bad); }
+    ol { margin: 0; padding-left: 20px; }
+    ol li + li { margin-top: calc(var(--pad) * .35); }
+    .flow { margin: 0; font-weight: 700; }
+    code { background: rgba(0, 0, 0, .45); border: 1px solid var(--line); padding: 1px 5px; border-radius: 4px;
+      color: #fff; font-weight: 700; word-break: break-all; }
+    a { color: var(--link); font-weight: 700; text-underline-offset: 2px; }
+    a:hover { color: var(--link-hover); }
+    .languages { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 0 0 calc(var(--gap) * 1.3); }
+    .languages button, .languages button:not(:disabled):hover { background: none; border: 0; box-shadow: none; }
+    .languages button { padding: 4px; margin: 0; border-radius: 6px; line-height: 0; opacity: .55; cursor: pointer;
+      transition: opacity .15s, transform .15s; }
+    .languages button:not(:disabled):hover { opacity: 1; transform: scale(1.1); }
+    .languages button[aria-pressed="true"] { opacity: 1; }
+    .languages button[aria-pressed="true"] svg { outline: 2px solid #fff; outline-offset: 2px; }
+    .languages svg { display: block; width: 30px; height: 20px; border-radius: 3px; box-shadow: 0 1px 6px rgba(0, 0, 0, .6); }
+    footer { text-align: center; }
+    .source { margin: var(--gap) 0 0; font-size: 1.1em; font-weight: 800; font-style: italic;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, .8); }
+    .source a { text-decoration: none; }
+    .source a[href]:hover, .source a[href]:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
+    .source a:not([href]) { color: var(--muted); }
+    .signature { margin: calc(var(--gap) * .5) 0 0; color: #d9e0f2; font-weight: 700; font-style: italic;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, .8); }
+    .legal { margin: calc(var(--gap) * 1.2) auto 0; max-width: 960px; padding: calc(var(--pad) * .55) 18px; color: #e4e9f6;
+      font-size: clamp(11.5px, 1.3vh, 13px); font-weight: 600; line-height: 1.5; text-wrap: pretty;
+      background: rgba(6, 10, 26, .78); border: 1px solid var(--line); border-radius: 12px; }
+    @media (max-width: 600px) { main { padding-top: 24px; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <nav class="languages" id="languages" aria-label="Language"></nav>
+    <img class="logo" src="icons/icon-192.png" width="192" height="192" alt="">
+    <h1>mgr-nx-deko <span class="accent">installer</span></h1>
+    <p class="lead" data-i18n-html="lead">Builds the <strong>Nintendo Switch</strong> package of <strong>Metal Gear Rising: Revengeance</strong> from your own <strong>Xbox 360</strong> copy. Everything runs in <strong>this browser</strong>.</p>
+  </header>
+
+  <section>
+    <h2 data-i18n="step1">1. Choose your game</h2>
+    <label class="button" for="folder" data-i18n="formatFolder">Folder</label>
+    <input id="package" type="file" multiple>
+    <input id="folder" type="file" webkitdirectory>
+    <p class="note" data-i18n-html="ownCopy"></p>
+    <p class="hint" data-i18n-html="formatHint"></p>
+    <div class="chosen" id="chosen">Nothing chosen yet.</div>
+  </section>
+
+  <section>
+    <h2 data-i18n="step2">2. Create the package</h2>
+    <div class="choices">
+      <p class="flow" data-i18n-html="step2First">If you are installing the game for the first time, use:</p>
+      <button id="create" class="primary" disabled data-i18n="create">Create mgr-nx-deko.zip</button>
+      <p class="flow" data-i18n-html="step2Update"></p>
+      <button id="update" disabled data-i18n="createUpdate">Create mgr-nx-deko-update.zip</button>
+    </div>
+    <div class="detected" id="detected" hidden>
+      <img src="icons/icon-192.png" width="44" height="44" alt="">
+      <div>
+        <div class="status" id="status"></div>
+        <div class="detail" id="detail"></div>
+        <div class="fingerprint" id="fingerprint" hidden></div>
+      </div>
+    </div>
+    <progress id="bar" max="1" value="0" hidden></progress>
+    <div id="log" role="log" aria-live="polite"></div>
+  </section>
+
+  <section>
+    <h2 data-i18n="step3">3. Copy it to the Switch</h2>
+    <ol>
+      <li data-i18n-html="step3Extract"></li>
+      <li data-i18n-html="step3Start"></li>
+      <li data-i18n-html="step3First"></li>
+    </ol>
+  </section>
+
+  <footer>
+    <p class="source"><a id="sourceLink" target="_blank" rel="noopener" data-i18n="sourceCode">Source code</a></p>
+    <p class="signature" data-i18n="signature">a ChanseyIsTheBest project</p>
+    <p class="legal" data-i18n="legal"></p>
+  </footer>
+</main>
+<script type="module" src="./app.js"></script>
+</body>
+</html>

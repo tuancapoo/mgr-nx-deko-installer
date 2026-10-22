@@ -1,0 +1,5 @@
+# The NRO is a release asset of the mgr-nx-deko repository; the deployment workflow downloads it.
+release/*.nro
+*.zip
+node_modules/
+__pycache__/
