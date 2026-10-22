@@ -53,6 +53,13 @@
     button:disabled { background: #1c2340; border-color: #1c2340; color: #6f7894; cursor: default; }
     input[type=file] { position: absolute; opacity: 0; width: 1px; height: 1px; }
     .hint { margin: calc(var(--pad) * .5) 0 0; }
+    .guide { margin: calc(var(--pad) * .5) 0 0; padding: calc(var(--pad) * .4) calc(var(--pad) * .6);
+      background: var(--inset); border: 1px solid var(--line); border-radius: 10px; }
+    .guide summary { cursor: pointer; font-weight: 700; }
+    .guide ol { margin: .5em 0; padding-left: 1.4em; }
+    .guide li { margin: .35em 0; }
+    .guide p { margin: .5em 0; }
+    .guide code { word-break: break-all; }
     .note { margin: calc(var(--pad) * .6) 0 0; padding: calc(var(--pad) * .45) calc(var(--pad) * .6);
       background: var(--inset); border: 1px solid var(--line); border-radius: 10px; }
     .chosen { color: var(--muted); margin-top: calc(var(--pad) * .35); word-break: break-all; }
@@ -118,6 +125,10 @@
     <input id="folder" type="file" webkitdirectory>
     <p class="note" data-i18n-html="ownCopy"></p>
     <p class="hint" data-i18n-html="formatHint"></p>
+    <details class="guide">
+      <summary data-i18n="isoGuideTitle">How do I extract the ISO of my disc?</summary>
+      <div data-i18n-html="isoGuide"></div>
+    </details>
     <div class="chosen" id="chosen">Nothing chosen yet.</div>
   </section>
 
