@@ -62,6 +62,7 @@
     .guide code { word-break: break-all; }
     .note { margin: calc(var(--pad) * .6) 0 0; padding: calc(var(--pad) * .45) calc(var(--pad) * .6);
       background: var(--inset); border: 1px solid var(--line); border-radius: 10px; }
+    .note.warn { border-color: rgba(245, 197, 24, .6); }
     .chosen { color: var(--muted); margin-top: calc(var(--pad) * .35); word-break: break-all; }
     .choices { display: grid; justify-items: start; row-gap: calc(var(--pad) * .4); }
     .choices button { margin: 0; }
@@ -170,6 +171,7 @@
       <li data-i18n-html="step3Start"></li>
       <li data-i18n-html="step3First"></li>
     </ol>
+    <p class="note warn" data-i18n-html="overclock"></p>
   </section>
 
   <footer>
