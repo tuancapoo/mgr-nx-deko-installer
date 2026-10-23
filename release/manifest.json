@@ -3,12 +3,12 @@
   "builds": [
     {
       "edition": "Metal Gear Rising - Revengeance (USA, Europe) (En,Ja,Fr,De,Es,It,Pt)",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "xex_sha256": "907c8ebe94f085924f230d815ffa0b89c65ce60adfd00184b047276954ddf443",
       "image_sha256": "",
       "nro": "mgr.nro",
-      "nro_sha256": "37e398a915030a2e4e861f6319d5466fe1cb50a69642cceb190c6c1668fd5d5f",
-      "nro_size": 57498528,
+      "nro_sha256": "d2cdeca72aac4125b28bd5798affc25a0a337a91d4b03a0fe02129415df70726",
+      "nro_size": 57502624,
       "game_files": 50,
       "game_bytes": 7830525715,
       "deko3d": {
