@@ -1,6 +1,6 @@
 <div align=center>
 
-<img src="icons/icon-192.png" alt="mgr-nx-deko" width="20%">
+<img src="icons/cover.jpg" alt="Metal Gear Rising: Revengeance" width="25%">
 
 </div>
 <h1 align=center>mgr-nx-deko installer</h1>
@@ -10,6 +10,12 @@ Metal Gear Rising: Revengeance (Xbox 360): **https://tuancapoo.github.io/mgr-nx-
 
 You give it your own copy of the game (the folder you extracted the disc into) and it gives you a zip ready to extract
 into the root of the SD card. Everything runs in your browser: the game files never leave your computer.
+
+## Support me
+
+Buy me a coffee to get the latest news on the next games: **[ko-fi.com/tuannguyen48448](https://ko-fi.com/tuannguyen48448)**
+
+<a href="https://ko-fi.com/tuannguyen48448"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support me on Ko-fi"></a>
 
 ## What it does
 

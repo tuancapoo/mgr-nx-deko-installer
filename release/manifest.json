@@ -2,13 +2,13 @@
   "version": 1,
   "builds": [
     {
-      "edition": "Xbox 360 (disc)",
-      "version": "0.2.0",
+      "edition": "Metal Gear Rising - Revengeance (USA, Europe) (En,Ja,Fr,De,Es,It,Pt)",
+      "version": "0.2.1",
       "xex_sha256": "907c8ebe94f085924f230d815ffa0b89c65ce60adfd00184b047276954ddf443",
       "image_sha256": "",
       "nro": "mgr.nro",
-      "nro_sha256": "930bb11aef623094b14ad5f8147ae9f90c02abdd8a48b3e5bef4758f675165a7",
-      "nro_size": 57473221,
+      "nro_sha256": "37e398a915030a2e4e861f6319d5466fe1cb50a69642cceb190c6c1668fd5d5f",
+      "nro_size": 57498528,
       "game_files": 50,
       "game_bytes": 7830525715,
       "deko3d": {

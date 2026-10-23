@@ -31,8 +31,8 @@
     main { width: 100%; max-width: 960px; margin: 0 auto; padding: var(--edge) 16px;
       display: flex; flex-direction: column; gap: var(--gap); }
     header { text-align: center; }
-    .logo { display: block; width: clamp(84px, 13vh, 132px); height: auto; margin: 0 auto calc(var(--gap) * .8);
-      border-radius: 22%; box-shadow: 0 10px 34px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .12); }
+    .logo { display: block; width: clamp(120px, 19vh, 190px); height: auto; margin: 0 auto calc(var(--gap) * .8);
+      border-radius: 12px; box-shadow: 0 10px 34px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .12); }
     h1 { font-size: clamp(1.7rem, 4.6vh, 2.6rem); font-weight: 900; font-style: italic; letter-spacing: .01em;
       line-height: 1.1; margin: 0 0 var(--gap); text-shadow: 0 2px 14px rgba(0, 0, 0, .8); }
     h1 .accent { color: var(--accent); }
@@ -95,6 +95,11 @@
     .languages button[aria-pressed="true"] { opacity: 1; }
     .languages button[aria-pressed="true"] svg { outline: 2px solid #fff; outline-offset: 2px; }
     .languages svg { display: block; width: 30px; height: 20px; border-radius: 3px; box-shadow: 0 1px 6px rgba(0, 0, 0, .6); }
+    .support { text-align: center; border-color: rgba(245, 197, 24, .45); }
+    .support p { margin: 0 0 calc(var(--pad) * .6); }
+    .support .kofi { display: inline-block; background: #ff5e5b; color: #fff; border-radius: 10px; padding: .5em 1.2em;
+      font-weight: 800; text-decoration: none; }
+    .support .kofi:hover { background: #ff7a77; color: #fff; }
     footer { text-align: center; }
     .source { margin: var(--gap) 0 0; font-size: 1.1em; font-weight: 800; font-style: italic;
       text-shadow: 0 1px 8px rgba(0, 0, 0, .8); }
@@ -113,10 +118,16 @@
 <main>
   <header>
     <nav class="languages" id="languages" aria-label="Language"></nav>
-    <img class="logo" src="icons/icon-192.png" width="192" height="192" alt="">
+    <img class="logo" src="icons/cover.jpg" width="474" height="584" alt="Metal Gear Rising: Revengeance">
     <h1>mgr-nx-deko <span class="accent">installer</span></h1>
     <p class="lead" data-i18n-html="lead">Builds the <strong>Nintendo Switch</strong> package of <strong>Metal Gear Rising: Revengeance</strong> from your own <strong>Xbox 360</strong> copy. Everything runs in <strong>this browser</strong>.</p>
   </header>
+
+  <section class="support">
+    <h2 data-i18n="supportTitle">Support me</h2>
+    <p data-i18n-html="support"></p>
+    <a class="kofi" href="https://ko-fi.com/tuannguyen48448" target="_blank" rel="noopener">&#9749; Ko-fi</a>
+  </section>
 
   <section>
     <h2 data-i18n="step1">1. Choose your game</h2>

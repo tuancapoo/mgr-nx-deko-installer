@@ -20,4 +20,4 @@ sources it can be rebuilt and replaced by a modified version.
 The licenses of the software in the package (the NRO and its libraries) are in [release/LICENSES.txt](release/LICENSES.txt),
 and the source code with its license is at https://github.com/tuancapoo/mgr-nx-deko.
 
-The icon is this project's own drawing (no game artwork). `lib/cpk.js` (the CPK reader) is mgr-nx-deko's, GPL-3.0.
+The icons and `icons/cover.jpg` are the game's cover art, © Konami Digital Entertainment, shown to identify the game. `lib/cpk.js` (the CPK reader) is mgr-nx-deko's, GPL-3.0.

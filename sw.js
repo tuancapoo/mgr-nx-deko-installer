@@ -16,6 +16,7 @@ const PAGE_FILES = [
   'icons/icon-32.png',
   'icons/icon-192.png',
   'icons/apple-touch-icon.png',
+  'icons/cover.jpg',
   'renut_shader_common.h',
   'lib/cpk.js',
   'lib/flags.js',
