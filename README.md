@@ -11,12 +11,6 @@ Metal Gear Rising: Revengeance (Xbox 360): **https://tuancapoo.github.io/mgr-nx-
 You give it your own copy of the game (the folder you extracted the disc into) and it gives you a zip ready to extract
 into the root of the SD card. Everything runs in your browser: the game files never leave your computer.
 
-## Support me
-
-Buy me a coffee to get the latest news on the next games: **[ko-fi.com/tuannguyen48448](https://ko-fi.com/tuannguyen48448)**
-
-<a href="https://ko-fi.com/tuannguyen48448"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support me on Ko-fi"></a>
-
 ## What it does
 
 1. Finds the game in the folder you chose: the shallowest `default.xex`, and `media/` beside it.
@@ -70,3 +64,9 @@ shader chain. See [NOTICES.md](NOTICES.md) and `release/LICENSES.txt`.
 No affiliation with Konami, PlatinumGames, Microsoft or Nintendo. "Metal Gear Rising: Revengeance" is a trademark of
 Konami Digital Entertainment. This page hosts no game data and no original game executable; you need your own legally
 obtained copy. Licensed under the GNU GPL v3 (see [LICENSE](LICENSE)).
+
+## Support me
+
+Buy me a coffee to help fund the next projects: **[ko-fi.com/tuannguyen48448](https://ko-fi.com/tuannguyen48448)**
+
+<a href="https://ko-fi.com/tuannguyen48448"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support me on Ko-fi"></a>
